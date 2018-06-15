@@ -2,7 +2,6 @@
 
 > A GitHub bot that uploads screenshots from pull request builds.
 
-
 _Built with [Probot](https://github.com/probot/probot)_
 
 ## Setup
