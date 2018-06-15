@@ -1,6 +1,10 @@
-module.exports = app => {
+module.exports = robot => {
   // Your code here
-  app.log('Yay, the app was loaded!')
+  robot.log('Yay, the robot was loaded!')
+
+  robot.on(['check_suite', 'pull_request'], async context => {
+    robot.log({event: context.event})
+  })
 
   // For more information on building apps:
   // https://probot.github.io/docs/
