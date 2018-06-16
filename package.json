@@ -20,6 +20,7 @@
     "test:watch": "jest --watch --notify --notifyMode=change --coverage"
   },
   "dependencies": {
+    "node-fetch": "^2.1.2",
     "probot": "^6.0.0",
     "rethinkdb": "^2.3.3"
   },
