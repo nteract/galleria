@@ -20,6 +20,10 @@ If you have suggestions for how galleria could be improved, or want to report a 
 
 For more, check out the [Contributing Guide](CONTRIBUTING.md).
 
+## Maintaining
+
+* [Galleria App Page](https://github.com/organizations/nteract/settings/apps/galleria) - only nteract members
+
 ## License
 
 [BSD-3-Clause](LICENSE) © 2018 nteract contributors (https://nteract.io)

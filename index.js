@@ -1,6 +1,6 @@
 const { CircleCI } = require("./circle.js");
 
-const { Markdown, Heading, Image, Gallery, P } = require("./markdown.js");
+const { Markdown, Heading, Link, Image, Gallery, P } = require("./markdown.js");
 
 async function makeBot(robot) {
   robot.log("Galleria is ready to go 🖼Y!");
@@ -62,6 +62,9 @@ async function makeBot(robot) {
     }
     robot.log.info("Artifacts", artifacts);
 
+    robot.log(
+      `Wish for Circle CI artifacts to not require being logged in to view them`
+    );
     // Craft our message for users
     const comment = Markdown(
       Heading("Here's your gallery!"),
@@ -75,7 +78,9 @@ async function makeBot(robot) {
               // Only screenshots
               artifact.path.startsWith("screenshots")
           )
-          .map(artifact => Image(artifact.url, artifact.pretty_path))
+          // Workaround github transcoding by linking to the image
+          // We should host the images somewhere to get around this (for now)
+          .map(artifact => Link(artifact.url, artifact.pretty_path))
       )
     );
     // Post an issue with the gallery!
