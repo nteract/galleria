@@ -1,5 +1,5 @@
 /**
- * Quick little API wrapper, designed for single repo usage
+ * Quick little CircleCI API wrapper, designed for single repo usage
  */
 
 const fetch = require("node-fetch");
@@ -17,8 +17,9 @@ class CircleCI {
   checkBuild(build_num) {
     const { owner, repo, token } = this;
 
-    const buildUrl = `https://circleci.com/api/v1.1/project/github/${owner}/${repo}/${build_num}?circle-token=${token}`;
-    return fetch(buildUrl).then(r => r.json());
+    return fetch(
+      `https://circleci.com/api/v1.1/project/github/${owner}/${repo}/${build_num}?circle-token=${token}`
+    ).then(r => r.json());
   }
 
   lastBuilds() {
@@ -31,8 +32,6 @@ class CircleCI {
 
   async artifacts(build_num) {
     const { owner, repo, token } = this;
-
-    const buildUrl = `https://circleci.com/api/v1.1/project/github/${owner}/${repo}/${build_num}?circle-token=${token}`;
 
     let build;
     let iterations = 0;
