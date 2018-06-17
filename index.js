@@ -1,6 +1,15 @@
 const { CircleCI } = require("./circle.js");
 
-const { Markdown, Heading, Link, Image, Gallery, P } = require("./markdown.js");
+const {
+  Markdown,
+  h2,
+  h3,
+  h4,
+  Link,
+  Image,
+  Gallery,
+  P
+} = require("./markdown.js");
 
 async function makeBot(robot) {
   robot.log("Galleria is ready to go 🖼Y!");
@@ -68,8 +77,8 @@ async function makeBot(robot) {
     );
     // Craft our message for users
     const comment = Markdown(
-      Heading("Here's your gallery!"),
-      P("🖼 🎨"),
+      h3("Here's your gallery!  🎨"),
+      P("\n\n"),
       Gallery(
         artifacts
           .filter(
