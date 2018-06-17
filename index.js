@@ -63,7 +63,6 @@ async function makeBot(robot) {
       robot.log.warn("no artifacts available");
       return;
     }
-    // TODO: Check artifacts to see if they can be loaded (circle ci & github proxy issue)
     robot.log(
       `Wish for Circle CI artifacts to not require being logged in to view them`
     );
@@ -86,8 +85,7 @@ async function makeBot(robot) {
             Link(artifact.url, Image(artifact.url, artifact.pretty_path))
           )
       )
-    );
-    // Post an issue with the gallery!
+    ); // Post an issue with the gallery!
     robot.log.debug("commenting with ", comment);
     await context.github.issues.createComment({
       owner,
