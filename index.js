@@ -40,19 +40,22 @@ async function makeBot(robot) {
     // * the build has finished (poll for this)
     const circle = new CircleCI(process.env.CIRCLE_CI_TOKEN, { owner, repo });
 
-    // TODO: Check validity of response from CircleCI
-    //       Response should be a 2xx and in the format we expect.
+    // Assume, hopefully, that the check suite we are on is in the collection of builds
+    // If a project is really big, this may not be the case 😬
+    // We'll cross that bridge when we reach it!
     const builds = await circle.lastBuilds();
-
     // Find the first build with the matching commit id
     robot.log(`Searching for commit ${head_commit.id}`);
     const build = builds.find(build => build.vcs_revision === head_commit.id);
     if (!build) {
-      robot.log.warn(`No build found for ${head_commit.id}`);
+      robot.log.warn(
+        `😬 No build found for ${
+          head_commit.id
+        }! Are there more builds than we can keep up with? 😬`
+      );
       return;
     }
     robot.log(`It's build ${build.build_num}!`);
-
     // Get all the artifacts from Circle CI
     robot.log("Wish for artifacts from Circle CI");
     const artifacts = await circle.artifacts(build.build_num);
@@ -61,7 +64,6 @@ async function makeBot(robot) {
       return;
     }
     robot.log.info("Artifacts", artifacts);
-
     robot.log(
       `Wish for Circle CI artifacts to not require being logged in to view them`
     );
@@ -82,8 +84,7 @@ async function makeBot(robot) {
           // We should host the images somewhere to get around this (for now)
           .map(artifact => Link(artifact.url, artifact.pretty_path))
       )
-    );
-    // Post an issue with the gallery!
+    ); // Post an issue with the gallery!
     robot.log.debug("commenting with ", comment);
     await context.github.issues.createComment({
       owner,
