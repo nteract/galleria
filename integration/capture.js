@@ -15,7 +15,7 @@ process.on("unhandledRejection", up => {
   const page = await browser.newPage();
 
   page.setViewport({
-    width: 800,
+    width: 1200,
     height: 600
   });
 
@@ -30,7 +30,7 @@ process.on("unhandledRejection", up => {
   });
 
   // Self referential!
-  await page.goto("https://github.com/nteract/galleria/pull/5", {
+  await page.goto("https://github.com/nteract/galleria/commits/master", {
     waitUntil: "domcontentloaded"
   });
 
@@ -38,7 +38,7 @@ process.on("unhandledRejection", up => {
     mkdirp("screenshots", err => (err ? reject(err) : resolve()))
   );
 
-  await page.hover(".timeline-commits");
+  await page.hover(".commit-group");
 
   await page.screenshot({ path: "screenshots/galleria.png" });
 
