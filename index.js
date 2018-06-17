@@ -77,7 +77,7 @@ async function makeBot(robot) {
     );
     // Craft our message for users
     const comment = Markdown(
-      h3("Here's your gallery!  🎨"),
+      h2("🎨"),
       P("\n\n"),
       Gallery(
         artifacts
@@ -94,7 +94,8 @@ async function makeBot(robot) {
             Link(artifact.url, Image(artifact.url, artifact.pretty_path))
           )
       )
-    ); // Post an issue with the gallery!
+    );
+    // Post an issue with the gallery!
     robot.log.debug("commenting with ", comment);
     await context.github.issues.createComment({
       owner,
