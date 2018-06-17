@@ -6,12 +6,9 @@ _Built with [Probot](https://github.com/probot/probot)_
 
 ## Overview
 
-If your project uses
-
-- Circle CI
-- Places artifacts into `screenshots/` on CircleCI
-
-Then this bot can help you out a little bit by linking to those screenshots in a github comment.
+Step 1: Put images in the `screenshots` path within [CircleCI artifacts](https://circleci.com/docs/2.0/artifacts/) (we recommend [puppeteer](https://github.com/GoogleChrome/puppeteer))
+Step 2: [Enable Galleria](https://github.com/apps/galleria)
+Step 3: Get pictures!
 
 ## Setup
 
