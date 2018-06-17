@@ -1,0 +1,36 @@
+version: 2
+jobs:
+  build:
+    docker:
+      # Gotta be on a browser ready image in order to use puppeteer to take screenshots
+      - image: circleci/node:10-browsers
+
+    working_directory: ~/galleria
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: npm install
+
+      - save_cache:
+          paths:
+            - ~/.npm
+            - ./node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      # run tests!
+      - run: npm run test
+      - run: npm run test:integration
+
+
+      # store the screenshots for access on Circle CI
+      - store_artifacts:
+          path: screenshots
+          destination: screenshots
