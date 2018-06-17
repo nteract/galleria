@@ -30,13 +30,15 @@ process.on("unhandledRejection", up => {
   });
 
   // Self referential!
-  await page.goto("https://github.com/nteract/galleria/blob/master/README.md", {
+  await page.goto("https://github.com/nteract/galleria/pull/5", {
     waitUntil: "domcontentloaded"
   });
 
   await new Promise((resolve, reject) =>
     mkdirp("screenshots", err => (err ? reject(err) : resolve()))
   );
+
+  await page.hover(".timeline-commits");
 
   await page.screenshot({ path: "screenshots/galleria.png" });
 
