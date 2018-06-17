@@ -14,6 +14,7 @@
   ],
   "scripts": {
     "dev": "nodemon --exec \"npm start\"",
+    "now-start": "PRIVATE_KEY=$(echo $PRIVATE_KEY_BASE64 | base64 -d) npm start",
     "start": "probot run ./index.js",
     "test:integration": "node integration/capture.js",
     "test": "jest",
